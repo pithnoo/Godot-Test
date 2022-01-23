@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://World/Bush.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 12, 6 )
+
+[node name="World" type="YSort"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 128, 104 )
+
+[node name="Bush" type="StaticBody2D" parent="."]
+position = Vector2( 240, 104 )
+
+[node name="Sprite" type="Sprite" parent="Bush"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bush"]
+position = Vector2( 0, 6 )
+shape = SubResource( 2 )
