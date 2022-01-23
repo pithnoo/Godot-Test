@@ -25,6 +25,4 @@ func _physics_process(delta):
 	
 	move_and_collide(velocity * delta)
 	
-	print("this is a test to show that the git push has worked")
-	print("if the git push has worked, my laptop should have this info too :D")
 
