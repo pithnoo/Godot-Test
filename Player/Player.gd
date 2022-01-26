@@ -25,5 +25,4 @@ func _physics_process(delta):
 	
 	move_and_collide(velocity * delta)
 	
-	print("testing if github works at home in comparison to at school")
-	#BOOM
+	
