@@ -1,10 +1,13 @@
 extends KinematicBody2D
 
 ##const acceleration = 10
-const maxSpeed = 100
+const moveSpeed = 100
 ##const friction = 50
 
 var velocity = Vector2.ZERO
+onready var animationPlayer = $AnimationPlayer
+onready var animationTree =  $AnimationTree
+onready var animationState = animationTree.get("parameters/playback")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,9 +21,13 @@ func _physics_process(delta):
 	
 	if input_vector != Vector2.ZERO:
 		##velocity = velocity.move_toward(input_vector * maxSpeed, acceleration * delta)
-		velocity = input_vector * maxSpeed
+		animationTree.set("parameters/Idle/blend_position", input_vector)
+		animationTree.set("parameters/Move/blend_position", input_vector)
+		animationState.travel("Move")
+		velocity = input_vector * moveSpeed
 	else:
 		##velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+		animationState.travel("Idle")
 		velocity = Vector2.ZERO
 	
 	move_and_collide(velocity * delta)
