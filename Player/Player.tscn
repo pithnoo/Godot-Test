@@ -243,4 +243,4 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 24 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
-parameters/Move/blend_position = Vector2( 0, 0 )
+parameters/Move/blend_position = Vector2( 0, 1 )
