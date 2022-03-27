@@ -57,7 +57,6 @@ func move_state(delta):
 
 func attack_state():
 	animationState.travel("Attack")
-	pass
 
 func attack_animation_finished():
 	state = MOVE
