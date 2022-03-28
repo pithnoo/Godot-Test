@@ -1,7 +1,8 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
+[ext_resource path="res://HitBox.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.37289, 4 )
@@ -362,11 +363,16 @@ start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=24]
 
+[sub_resource type="CapsuleShape2D" id=36]
+radius = 9.0
+height = 6.0
+
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 0, -8 )
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_lock_": true
 }
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -403,3 +409,15 @@ parameters/playback = SubResource( 24 )
 parameters/Attack/blend_position = Vector2( 0, 0 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Move/blend_position = Vector2( 0, 1 )
+
+[node name="HitBoxPoint" type="Position2D" parent="."]
+position = Vector2( 0, -3 )
+
+[node name="SwordHitBox" parent="HitBoxPoint" instance=ExtResource( 3 )]
+position = Vector2( 0, 3 )
+
+[node name="CollisionShape2D" parent="HitBoxPoint/SwordHitBox" index="0"]
+position = Vector2( 0, 8 )
+shape = SubResource( 36 )
+
+[editable path="HitBoxPoint/SwordHitBox"]
