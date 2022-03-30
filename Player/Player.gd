@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 ##const acceleration = 10
 const moveSpeed = 100
+const rollSpeed = 130
 ##const friction = 50
 
 enum {
@@ -12,7 +13,7 @@ enum {
 
 var state = MOVE
 var velocity = Vector2.ZERO
-
+var roll_vector = Vector2.DOWN
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree =  $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
@@ -27,9 +28,9 @@ func _physics_process(delta):
 		MOVE:
 			move_state(delta)
 		ROLL:
-			roll_state()
+			roll_state(delta)
 		ATTACK:
-			attack_state()
+			attack_state(delta)
 	
 func move_state(delta):
 	var input_vector = Vector2.ZERO
@@ -39,9 +40,11 @@ func move_state(delta):
 	
 	if input_vector != Vector2.ZERO:
 		##velocity = velocity.move_toward(input_vector * maxSpeed, acceleration * delta)
+		roll_vector = input_vector
 		animationTree.set("parameters/Idle/blend_position", input_vector)
 		animationTree.set("parameters/Move/blend_position", input_vector)
 		animationTree.set("parameters/Attack/blend_position", input_vector)
+		animationTree.set("parameters/Roll/blend_position", input_vector)
 		animationState.travel("Move")
 		velocity = input_vector * moveSpeed
 	else:
@@ -53,16 +56,27 @@ func move_state(delta):
 	if Input.is_action_just_pressed("attack"):
 		state = ATTACK
 	
+	if Input.is_action_just_pressed("roll"):
+		state = ROLL
+
 	move_and_collide(velocity * delta)
 
-func attack_state():
+
+func move():
+	velocity = move_and_collide(velocity)
+
+func attack_state(delta):
 	animationState.travel("Attack")
 
 func attack_animation_finished():
 	state = MOVE
 
-func roll_state():
-	pass
+func roll_state(delta):
+	velocity = roll_vector * rollSpeed
+	move()
+
+func roll_animation_finished():
+	state = MOVE
 	
 	
 	
