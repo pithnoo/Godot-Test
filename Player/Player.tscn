@@ -584,7 +584,7 @@ blend_point_3/node = SubResource( 19 )
 blend_point_3/pos = Vector2( 0, -1 )
 
 [sub_resource type="AnimationNodeAnimation" id=41]
-animation = "RunDown"
+animation = "RollDown"
 
 [sub_resource type="AnimationNodeAnimation" id=42]
 animation = "RollUp"
@@ -685,7 +685,7 @@ parameters/playback = SubResource( 24 )
 parameters/Attack/blend_position = Vector2( 0, 0 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Move/blend_position = Vector2( 0, 1 )
-parameters/Roll/blend_position = Vector2( 0, 0 )
+parameters/Roll/blend_position = Vector2( -0.0031696, 1.08103 )
 
 [node name="HitBoxPivot" type="Position2D" parent="."]
 position = Vector2( 0, 4 )
