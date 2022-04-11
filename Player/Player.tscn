@@ -1,8 +1,9 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
 [ext_resource path="res://HitBox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/SwordHitbox.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.37289, 4 )
@@ -631,7 +632,7 @@ states/Roll/node = SubResource( 45 )
 states/Roll/position = Vector2( 120, 89 )
 transitions = [ "Idle", "Move", SubResource( 21 ), "Move", "Idle", SubResource( 22 ), "Idle", "Attack", SubResource( 34 ), "Attack", "Idle", SubResource( 35 ), "Idle", "Roll", SubResource( 46 ), "Roll", "Idle", SubResource( 47 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -313, -8 )
+graph_offset = Vector2( -295, 7 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=24]
 
@@ -683,7 +684,7 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 24 )
 parameters/Attack/blend_position = Vector2( 0, 0 )
-parameters/Idle/blend_position = Vector2( 0, 0 )
+parameters/Idle/blend_position = Vector2( 0, -0.00948286 )
 parameters/Move/blend_position = Vector2( 0, 1 )
 parameters/Roll/blend_position = Vector2( -0.0031696, 1.08103 )
 
@@ -693,6 +694,7 @@ position = Vector2( 0, 4 )
 [node name="SwordHitBox" parent="HitBoxPivot" instance=ExtResource( 3 )]
 position = Vector2( 15, 0 )
 collision_mask = 8
+script = ExtResource( 4 )
 
 [node name="CollisionShape2D" parent="HitBoxPivot/SwordHitBox" index="0"]
 shape = SubResource( 36 )
